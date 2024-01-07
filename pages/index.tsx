@@ -134,7 +134,7 @@ export default function Home ({
       wrapper="span"
       speed={50}
       style={{ fontSize: '1.5em', display: 'inline-block', }}
-      repeat={Infinity}
+      repeat={100}
     /><span className="text-pink-600 text-3xl mx-1">{"/>"}</span>
       <button className="rounded-full w-28 font-lato bg-pink-500 block mt-4 py-2 font-lato text-md text-white mx-auto lg:hidden">
         Explore
