@@ -1,0 +1,24 @@
+{
+  "files": {
+    "components/Carousel.tsx": [
+      {
+        "id": "50f72d83-dc7d-4616-a63d-f00e39f239f8",
+        "line": 6,
+        "version": 975,
+        "index": 137
+      },
+      {
+        "id": "40382904-8217-4e94-b45c-d9169ce76ef9",
+        "line": 7,
+        "version": 975,
+        "index": 149
+      },
+      {
+        "id": "4bd2f4ba-4b6d-4f43-8d0d-659f99cd6485",
+        "line": 9,
+        "version": 975,
+        "index": 152
+      }
+    ]
+  }
+}
