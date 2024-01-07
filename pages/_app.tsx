@@ -33,12 +33,12 @@ function MyApp({ Component, pageProps }: AppProps) {
    else if (pathname == "/enrolled") setTab(3);
    else if (pathname == "/profile") setTab(4);
    else setTab(1);
-  }, [pathname, searchParams]);
+  }, [pathname]);
  return <>
   
 <SessionProvider session={pageProps.session}>
- <Nav/>
  <ThemeProvider>
+ <Nav/>
   <LoadingBar
    color='#f11946'
    waitingTime={400}
@@ -56,34 +56,3 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 export default MyApp
 
-/*
-
-<ThemeProvider>
-  <LoadingBar
-   color='#f11946'
-   waitingTime={400}
-   progress={progress}
-   onLoaderFinished={() => setProgress(0)}
-  /> 
-  <PageSpinner Loading={progress==0?false:true}/>
-    <Component {...pageProps} />
-   <BottomNavbar setTab={setTab} tab={tab} />
-    <Footer />
- </ThemeProvider>
-
-
-
-    <PageSpinner Loading={progress==0?false:true}/>
-    
-       
-  
-  
-    
-    
-   
-    
-    
-
-
-
-*/

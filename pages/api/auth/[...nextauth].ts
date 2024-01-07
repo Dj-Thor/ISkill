@@ -7,7 +7,7 @@ import dbConnect from "../../../modals/db";
 import user from '../../../modals/user';
 import VerifyOTP from "../../../myFunctions/verifyOtp";
 
-const randomPassword = () => {
+const randomPassword = async () => {
 
 const alpha = "Qwertyuiopasdfghjklzxcvbnm";
 const num = "5432167890";
@@ -135,7 +135,7 @@ if (account.provider === "google") {
    
    if (!mySecret ) throw new Error("Internal Error");
    
-  const encrypted = CryptoJS.AES.encrypt(randomPassword(), mySecret).toString();
+  const encrypted = CryptoJS.AES.encrypt(await randomPassword(), mySecret).toString();
   
   let User = new user({
   name: profile.name,

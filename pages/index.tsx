@@ -118,7 +118,7 @@ export default function Home ({
  </div>
  
  <div className="w-full text-center  text-sm">
-  <Image className="object-contain  rounded" height={400} width={400} src="/homegif.gif" alt="gif" priority/>
+  <Image className="object-contain  rounded" height={400} width={400} src="/optimisedHomeGif.gif" alt="gif" priority/>
  </div>
 </div>
 <div className="py-5 p-1.5 text-center rounded-lg my-4 mx-5  text-lg ">
