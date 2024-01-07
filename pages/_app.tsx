@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   router.events.on('routeChangeComplete', () => {
    setProgress(100);
   })
- });
+ }, []);
  React.useEffect(() => {
    if (pathname == "/") setTab(1);
    else if (pathname == "/courses") setTab(2);

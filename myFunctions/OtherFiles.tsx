@@ -1,107 +1,9 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from "next/image"
-import React from "react";
-import { TypeAnimation } from 'react-type-animation';
-import Carousel from "../components/Carousel"
-import ShowByCategory from "../components/ShowByCategory"
-import LikeButton from "../components/LikeButton";
-import WishList from "../components/Wishlist";
-import Link from "next/link";
-import Accordian from  "../components/Accordion";
-import {useRouter} from "next/router"
-import type {
- GetServerSidePropsContext,
- InferGetServerSidePropsType,
-} from "next"
-import dbConnect from "../modals/db";
-import course from '../modals/course';
-
-
-
-type Course = {
- name : string,
- courseId : string,
- price:  number,
- description: string,
- mentors: [],
- playlistId:string,
- img: string,
- rating: number,
- comments: [],
- enrolledCount: number,
- isVideo: boolean,
- likes: number,
-}
-
-type courseItemProp = {
- CourseDetails: Course,
- key?: number
-}
-
-
-
-
-const URL = process.env['NEXT_PUBLIC_URL'];
-
-const CourseItem = ({CourseDetails}:courseItemProp) => {
- const {name, img, mentors, description, price, rating, likes, enrolledCount, courseId} = CourseDetails;
-  return (<> <div className="md:w-[24%] w-[48%] p-1.5 my-auto shadow rounded">
-    <div className="flex relative w-full h-24 md:h-32">
-     <Image alt="img" height={100} width={100} className="absolute w-full inset-0 object-contai object-cover hover:hidden  rounded-xl" src={img} />
-     <div className="absolute z-1 h-full p-4 bg-gray-900 opacity-0  hover:opacity-100 transition duration-700 rounded-xl overflow-y-scroll  text-sm md:text-md mx-auto">
-      
-      <h3 className="title-font  font-medium text-gray-50 mb-1">
-     {mentors.map((e:string) =>{return e+" ";})}
-      </h3>
-      
-      <h3 className="title-font  font-medium text-gray-50 text-xs md:text-md mb-1">
-       <del>₹{price}</del> <span className="mx-1">Free</span>|<span className="mx-1">{likes}K+ Likes</span>|<span className="mx-1">{enrolledCount}K+ Enrolled</span>
-      </h3>
-      
-     </div>
-    </div>
-    
-    <h1 className="title-font md:text-lg text-xs font-medium myColor1 mb-3 mt-2 mx-3 line-clamp-2 text-bold">{name}</h1> 
-
- <div className="flex mx-1">
-  <LikeButton course={courseId} />
-  <WishList  course={courseId} />
-  
-  <button className="p-2 rounded-full bg-gray-100 mx-1" >
-
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-indigo-500 text-bold">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-</svg>
-
- </button>
-    </div>
- <div className="flex mb-3 mx-2">
-  <Link href={`./course/${courseId}`} className="rounded-full bg-pink-600 text-white font-poppins mt-4 px-4 py-2 text-xs mx-auto">
-       Enroll Now
-      </Link>
- </div>
- 
- </div>
-  </>)
-}
-
-
-
-export default function Home ({
- Data, android, web, dataScience, devops, machineLearning}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+/*
+const ContainerOne = () => {
  const router = useRouter();
-
-  return (<>
-<Head>
-  <title>ISkill | Skill Up YourSelf</title>
-  <meta name="description" content="Learn Top Level Skills From Top Level Teachers" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <link rel="icon" href="/favicon.ico "/>
-</Head>
-
-
- <div className="flex flex-nowrap  lg:p-8">
+ // Top Hero Image
+ return (<>
+  <div className="flex flex-nowrap  lg:p-8">
 
  <div className="w-full justify-center hidden flex-wrap pt-10 px-10 md:block ">
   
@@ -140,8 +42,70 @@ export default function Home ({
         Explore
    </button>
    </div>
+</>)
+}
+const ContainerTwo = () => {
+ const router = useRouter();
+ // 4 Images
+ return (<>
+  <div className="Main container flex flex-wrap gap-5 p-5 mx-auto ">  
+    
+    
+<div className="Sub container flex flex-wrap justify-center pb-4 gap-3 lg:w-[45%] h-92 ">
+    
+ <div className="p-3">
+ <img className="h-72 " src="/Untitled design 2.png" alt=""></img>
+ </div>
+ <div className="flex flex-wrap p-2 justify-center gap-3">
+    <h2 className="text-2xl text-center myColor">Be a Certified Developer</h2>
+    <p className="text-center px-2 lg:w-3/4 mx-auto ">Instructors from around the world teach millions of learners on ISkills. We provide the tools and skills to teach what you love.</p>
+ </div>
+   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-cyan-500 px-5 py-2">Start Learning</button>
+</div>
 
-   <div className="container flex flex-wrap gap-5 p-8 md:flex-unwrap  justify-center mb-6  mx-auto">
+<div className="Sub container flex flex-wrap justify-center py-4 gap-3 lg:w-[45%]">
+    
+ <div className="p-3">
+ <img className="h-72 " src="/Untitled design 1.png" alt=""></img>
+ </div>
+ <div className="flex flex-wrap p-2 justify-center gap-3">
+    <h2 className="text-2xl text-center myColor">Learn From Experienced Mentors </h2>
+    <p className="text-center px-2 lg:w-3/4 mx-auto ">Empowering enthusiasts globally, our expert instructors inspire countless learners. Join us to share your passion, equipped with the tools and skills to ignite curiosity</p>
+ </div>
+   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-purple-500 px-5 py-2">Start Learning</button>
+</div>
+    
+<div className="Sub container flex flex-wrap justify-center py-4 gap-3 lg:w-[45%]">
+    
+ <div className="p-3">
+ <img className="h-72 " src="/Untitled design 4.png" alt=""></img>
+ </div>
+ <div className="flex flex-wrap p-2 justify-center gap-3">
+    <h2 className="text-2xl text-center myColor">Learn Popular Softwares</h2>
+    <p className="text-center px-2 lg:w-3/4 mx-auto ">Embark on a learning journey with our diverse community of instructors, guiding and inspiring learners worldwide. We equip you with the tools and expertise to share your knowledge and make a meaningful impact.</p>
+ </div>
+   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-red-500 px-5 py-2">Start Learning</button>
+</div>
+   
+ <div className="Sub container flex flex-wrap justify-center py-4 gap-3 lg:w-[45%]">
+    
+ <div className="p-3">
+ <img className="h-72 " src="/Untitled design 3.png" alt=""></img>
+ </div>
+ <div className="flex flex-wrap p-2 justify-center gap-3">
+    <h2 className="text-2xl text-center myColor">Work With Professional Teams</h2>
+    <p className="text-center px-2 lg:w-3/4 mx-auto ">Dive into the world of knowledge as our international team of educators shapes the learning experience. Fuel your passion and become a beacon of inspiration – because here, teaching what you love is not just a skill, it&apos;s a calling.</p>
+ </div>
+   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-yellow-500 px-5 py-2">Start Learning</button>
+</div>
+    
+</div>
+ </>)
+}
+const ContainerThree = () => {
+ // 4 Rectangular container 
+ return (<>
+  <div className="container flex flex-wrap gap-5 p-8 md:flex-unwrap  justify-center mb-6  mx-auto">
  
 <div className="container p-4 shadow rounded-lg flex md:w-[40%] mb-3 bg-gray-50">
      <div className="flex px-2 bg-pink-200 items-center text-pink-600 rounded-lg ">
@@ -198,78 +162,12 @@ export default function Home ({
    </div>   
      
 </div>
- 
- 
- <Carousel Data={Data}/> 
- <ShowByCategory Data={Data} android={android} web={web} dataScience={dataScience} devops={devops} machineLearning={machineLearning}  /> 
-
-
-
-
- <div className="flex flex-wrap  gap-2 mx-auto md:gap-3 md:w-[96%] w-full mt-20 md:px-3 my-16 px-2">
-    <h1 className="text-3xl md:text-5xl  font-medium px-3 title-font text-gray-900 w-full mb-6 md:text-center myColor ">Popular Courses</h1>
-   {Data.map((item:Course, idx:number)=>{
-      return <CourseItem key={idx} CourseDetails={item} />
-     })}
-    </div>
-
-   
-
- <div className="Main container flex flex-wrap gap-5 p-5 mx-auto ">  
-    
-    
-<div className="Sub container flex flex-wrap justify-center pb-4 gap-3 lg:w-[45%] h-92 ">
-    
- <div className="p-3">
- <img className="h-72 " src="/Untitled design 2.png" alt=""></img>
- </div>
- <div className="flex flex-wrap p-2 justify-center gap-3">
-    <h2 className="text-2xl text-center myColor">Be a Certified Developer</h2>
-    <p className="text-center px-2 lg:w-3/4 mx-auto ">Instructors from around the world teach millions of learners on ISkills. We provide the tools and skills to teach what you love.</p>
- </div>
-   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-cyan-500 px-5 py-2">Start Learning</button>
-</div>
-
-<div className="Sub container flex flex-wrap justify-center py-4 gap-3 lg:w-[45%]">
-    
- <div className="p-3">
- <img className="h-72 " src="/Untitled design 1.png" alt=""></img>
- </div>
- <div className="flex flex-wrap p-2 justify-center gap-3">
-    <h2 className="text-2xl text-center myColor">Learn From Experienced Mentors </h2>
-    <p className="text-center px-2 lg:w-3/4 mx-auto ">Empowering enthusiasts globally, our expert instructors inspire countless learners. Join us to share your passion, equipped with the tools and skills to ignite curiosity</p>
- </div>
-   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-purple-500 px-5 py-2">Start Learning</button>
-</div>
-    
-<div className="Sub container flex flex-wrap justify-center py-4 gap-3 lg:w-[45%]">
-    
- <div className="p-3">
- <img className="h-72 " src="/Untitled design 4.png" alt=""></img>
- </div>
- <div className="flex flex-wrap p-2 justify-center gap-3">
-    <h2 className="text-2xl text-center myColor">Learn Popular Softwares</h2>
-    <p className="text-center px-2 lg:w-3/4 mx-auto ">Embark on a learning journey with our diverse community of instructors, guiding and inspiring learners worldwide. We equip you with the tools and expertise to share your knowledge and make a meaningful impact.</p>
- </div>
-   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-red-500 px-5 py-2">Start Learning</button>
-</div>
-   
- <div className="Sub container flex flex-wrap justify-center py-4 gap-3 lg:w-[45%]">
-    
- <div className="p-3">
- <img className="h-72 " src="/Untitled design 3.png" alt=""></img>
- </div>
- <div className="flex flex-wrap p-2 justify-center gap-3">
-    <h2 className="text-2xl text-center myColor">Work With Professional Teams</h2>
-    <p className="text-center px-2 lg:w-3/4 mx-auto ">Dive into the world of knowledge as our international team of educators shapes the learning experience. Fuel your passion and become a beacon of inspiration – because here, teaching what you love is not just a skill, it&apos;s a calling.</p>
- </div>
-   <button onClick={()=>{router.push(`${URL}/courses`)}} className="w-72 text-xl text-white bg-yellow-500 px-5 py-2">Start Learning</button>
-</div>
-    
-</div>
-
-   
-<div className="container  p-4 mx-auto pt-12 pb-8 mt-6">
+ </>)
+}
+const ContainerFour = () => {
+ // Companies Container
+ return (<>
+  <div className="container  p-4 mx-auto pt-12 pb-8 mt-6">
  <p className="text-center text-xl md:text-2xl lg:text-3xl md:px-6 myColor">
   Trusted By Over 15000 Companies and millions or learners around the world
  </p>
@@ -291,7 +189,14 @@ export default function Home ({
   </div>
 </div>
 
-<section className="text-gray-600  body-font">
+
+
+ </>)
+}
+const ContainerFive = () => {
+ // Testimonials 
+ return (<>
+  <section className="text-gray-600  body-font">
   <div className="md:w-5/6 w-full px-5 py-12 mx-auto">
     <h1 className="md:text-5xl text-3xl font-medium title-font mb-12 text-center myColor ">Success Stories</h1>
    
@@ -337,30 +242,18 @@ export default function Home ({
 
   </div>
 </section>
- 
- 
- <Accordian/>
-</> 
-  )
+    
+ </>)
 }
- 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
- 
- await dbConnect();
- let allCourses = await course.find({});
- let android = await course.find({category:"android"});
- let web = await course.find({category:"web"});
- let machineLearning = await course.find({category:"machineLearning"});
- let devops = await course.find({category:"devops"});
- let dataScience = await course.find({category:"dataScience"});
- 
- return {
-  props: { Data: JSON.parse(JSON.stringify(allCourses)) ?? [], android: JSON.parse(JSON.stringify(android)) ?? [], web: JSON.parse(JSON.stringify(web)) ?? [], machineLearning: JSON.parse(JSON.stringify(machineLearning)) ?? [], dataScience: JSON.parse(JSON.stringify(dataScience)) ?? [], devops: JSON.parse(JSON.stringify(devops)) ?? [] }
+const ContainerSix = (Props:Prop) => {
+
+ return (<>
+  <div className="flex flex-wrap  gap-2 mx-auto md:gap-3 md:w-[96%] w-full mt-20 md:px-3 my-16 px-2">
+    <h1 className="text-3xl md:text-5xl  font-medium px-3 title-font text-gray-900 w-full mb-6 md:text-center myColor ">Popular Courses</h1>
+   {Props.Data.map((item:Course, idx:number)=>{
+      return <CourseItem key={idx} CourseDetails={item} />
+     })}
+    </div>
+ </>)
 }
-}
-
-
-
-
-
-
+*/ 
