@@ -65,7 +65,7 @@ export default function ShowByCategory (Props:Prop) {
  return <div key={idx} className="flex-shrink-0 w-48 p-2  border shadow rounded bg-gray-100">
 
  <div className="relative overflow-hidden font-poppins">
-     <Image className="object-contain  w-full rounded-lg" src={img} width={500} height={200} alt=""/>
+     <Image className="object-contain  w-full rounded-lg" src={img} width={500} height={200} alt="img"/>
  </div>
  <div className="py-2 px-2">
   <h1 className="text-md text-pink-500 line-clamp-2 mb-1">{name}</h1>

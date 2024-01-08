@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   /> 
   <PageSpinner Loading={progress==0?false:true}/>
     <Component {...pageProps} />
-   
+   <BottomNavbar setTab={setTab} tab={tab} />
     <Footer />
  </ThemeProvider>
 </SessionProvider>
