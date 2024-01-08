@@ -39,6 +39,99 @@ type courseItemProp = {
  key?: number
 }
 
+const data =  [
+		{
+			"_id": "6550f013dcf5ba71a10de744",
+			"name": "Javascript Course for Beginners",
+			"courseId": "1699803155283",
+			"price": 0,
+			"description": "JavaScript Course in Hindi: This Javascript tutorial in Hindi course is designed for beginners with an aim to take JavaScript/ES6 and its concepts to an advanced level. Master JavaScript with this course",
+			"mentors": [
+				"[\"Harry\"]"
+			],
+			"playlistId": "addIdHere",
+			"img": "https://i.ytimg.com/vi/ER9SspLe4Hg/maxresdefault.jpg",
+			"rating": 4,
+			"reviews": [],
+			"enrolledCount": 0,
+			"isVideo": false,
+			"likes": 0,
+			"__v": 0
+  },
+		{
+			"_id": "6550f33ddcf5ba71a10de755",
+			"name": "Java Rest App with Quarkus and JPAStreamer",
+			"courseId": "1699803965111",
+			"price": 0,
+			"description": "In this course, you'll learn how to use Quarkus and JPAStreamer to build a REST web application. Quarkus is an open-source framework tailored for Java, optimized for building speedy cloud-native microservices and serverless applications, especially in containerized environments like Kubernetes. JPAStreamer, on the other hand, is a Java library that simplifies database interactions by allowing JPA entities to harness the expressiveness of Java Stream operations.",
+			"mentors": [
+				"[\"Julia Gustafsson\"]"
+			],
+			"playlistId": "addIdHere1",
+			"img": "https://www.freecodecamp.org/news/content/images/size/w2000/2023/11/jpastreamer_featureimage_update.png",
+			"rating": 4,
+			"reviews": [],
+			"enrolledCount": 0,
+			"isVideo": false,
+			"likes": 0,
+			"__v": 0
+		},
+		{
+			"_id": "6550f4e59780a7611932cef0",
+			"name": "Kotlin and Android Development Course",
+			"courseId": "1699804389586",
+			"price": 0,
+			"description": "In this Kotlin and Android course, you will learn about collections, generics, lambdas, Android Studio, widgets, and more. You will also learn how to build a full quiz application for Android devices.",
+			"mentors": [
+				"[\"Alexandru Cristian\"]"
+			],
+			"playlistId": "addIdHere2",
+			"img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMgRoQexQbVfteudTJUY71P2MgjoJTF7jg98vfcKiX51Vfe2F7rCtsYik&s=10",
+			"rating": 4,
+			"reviews": [],
+			"enrolledCount": 0,
+			"isVideo": false,
+			"likes": 0,
+			"__v": 0
+		},
+		{
+			"_id": "6550f7e90f3d5c98963f05c2",
+			"name": "Python Programming For Beginners",
+			"courseId": "1699805161292",
+			"price": 0,
+			"description": "Welcome to the launch video for our Python series on College Wallah s YouTube channel! Starting on Thursday, March 30th, we will be taking you on a journey from absolute scratch to advanced concepts in Python programming. Whether you are a complete beginner or have some experience in programming, this series will provide you with a solid foundation in Python. We will cover topics such as variables, data types, control structures, functions, and more, all while providing you with examples and exercises to reinforce your learning. All of the resources you need will be provided, Plus, the course will be live on College Wallah s YouTube channel, allowing you to interact with the instructors and fellow mates to ask questions in the comment section.",
+			"mentors": [
+				"[\"Sudhanshu Kumar\"]"
+			],
+			"playlistId": "addIdHere3",
+			"img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyf7HIvNlba4T_Njj85UwP-pxdu6mpOX6Zh3pKFfapFwosNYf6rkmqJY0b&s=10",
+			"rating": 4,
+			"reviews": [],
+			"enrolledCount": 0,
+			"isVideo": false,
+			"likes": 0,
+			"__v": 0
+		},
+		{
+			"_id": "6550f8ea0f3d5c98963f05cc",
+			"name": "React Course - Tutorial for React Library",
+			"courseId": "1699805418438",
+			"price": 0,
+			"description": "React is one of the most popular front-end JavaScript libraries for building user interfaces. After completing this course, you will be able to build web apps in modern React, using patterns like functional components and hooks.",
+			"mentors": [
+				"[\"Bob Ziroll\"]"
+			],
+			"playlistId": "addIdHere4",
+			"img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIhgVPUzA0DqwCHCLS_tKVGp_TkujwJMcQSA&usqp=CAU",
+			"rating": 4,
+			"reviews": [],
+			"enrolledCount": 0,
+			"isVideo": false,
+			"likes": 0,
+			"__v": 0
+		}
+	];
+
 
 
 
@@ -89,7 +182,7 @@ const CourseItem = ({CourseDetails}:courseItemProp) => {
 
 
 export default function Home ({
- Data, android, web, dataScience, devops, machineLearning}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+ Data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
  const router = useRouter();
 
   return (<>
@@ -201,7 +294,7 @@ export default function Home ({
  
  
  <Carousel Data={Data}/> 
- <ShowByCategory Data={Data} android={android} web={web} dataScience={dataScience} devops={devops} machineLearning={machineLearning}  /> 
+ <ShowByCategory Data={Data} android={Data} web={Data} dataScience={Data} devops={Data} machineLearning={Data}  /> 
 
 
 
@@ -343,6 +436,17 @@ export default function Home ({
 </> 
   )
 }
+
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+ 
+ 
+ 
+ return {
+  props: { Data: JSON.parse(JSON.stringify(data))}
+ }
+}
+/*
  
 export async function getServerSideProps(context: GetServerSidePropsContext) {
  
@@ -359,8 +463,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 }
 
+machineLearning, android, web, dataScience, devops
 
-
-
+*/
 
 

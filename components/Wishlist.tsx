@@ -26,7 +26,7 @@ const [user, setUser] = React.useState(false);
  },[status]);
 
 React.useEffect(() => {
- if (user) fetchDetail();
+ if (user) setIsLiked(true);
  else setIsLiked(false);
 },[user])
  
@@ -54,8 +54,10 @@ draggable: true,
 progress: undefined,
 theme: "dark",
 className: "font-poppins transition-all"
- });
+ }); 
  if (!user || isLiked) return;
+ setIsLiked(false);
+ /*
  let response = await fetch(`${URL}/api/enroll`, {
     method: "POST",
     headers: {
@@ -66,12 +68,13 @@ className: "font-poppins transition-all"
  const json = await response.json();
  if (json.success) {
   setIsLiked(true);
- } 
+ } */
 };
 
 const removeFromLiked = async () => {
  if (!user || !isLiked) return;
- let response = await fetch(`${URL}/api/enroll`, {
+ setIsLiked(false);
+ /*let response = await fetch(`${URL}/api/enroll`, {
     method: "POST",
     headers: {
      "Content-Type": "application/json",
@@ -81,7 +84,7 @@ const removeFromLiked = async () => {
  const json = await response.json();
  if (json.success) {
   setIsLiked(false);
- } 
+ } */
 };
 
    return (<>

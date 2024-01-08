@@ -26,6 +26,7 @@ const {course} = Data;
 const [isLiked, setIsLiked] = React.useState(false); 
 
 const fetchDetail = async () => {
+ // no use 
  let response = await fetch(`${URL}/api/enroll`, {
     method: "POST",
     headers: {
@@ -37,11 +38,26 @@ const fetchDetail = async () => {
  if (json.success) setIsLiked(true);
  else setIsLiked(false);
 };
- 
+
+const checkLiked = async () => {
+ const likedCourses = localStorage.getItem("Liked");
+ if (!likedCourses)  {
+  setIsLiked(false);
+  return
+ }
+ const parsed = await JSON.parse(likedCourses);
+ if (parsed.length == 0)  {
+  setIsLiked(false);
+  return;
+ }
+ let flag = parsed.contains(course);
+ if (flag) setIsLiked(true);
+ else setIsLiked(false);
+}
 
  
 React.useEffect(() => {
- if (user) fetchDetail();
+ if (user) checkLiked();
  else setIsLiked(false);
 },[user])
 
@@ -54,11 +70,27 @@ closeOnClick: true,
 pauseOnHover: true,
 draggable: true,
 progress: undefined,
-theme: "dark",
+theme: "dark", 
 className: "font-poppins transition-all"
  });
  if (!user || isLiked) return;
- let response = await fetch(`${URL}/api/enroll`, {
+ else {
+ const item = localStorage.getItem("Liked");
+ if (!item) {
+  let ar = [];
+  ar.push(course);
+  const value = JSON.stringify(ar);
+  localStorage.setItem("Liked",value);
+ } else {
+  const likedCourses = JSON.parse(item);
+  likedCourses.add(course); 
+  const value = JSON.stringify(likedCourses);
+  localStorage.setItem("Liked",value);
+  }
+  setIsLiked(true);
+ }
+ return;
+ /*let response = await fetch(`${URL}/api/enroll`, {
     method: "POST",
     headers: {
      "Content-Type": "application/json",
@@ -68,12 +100,31 @@ className: "font-poppins transition-all"
  const json = await response.json();
  if (json.success) {
   setIsLiked(true);
- } 
+ } */
 };
 
 const removeFromLiked = async () => {
  if (!user || !isLiked) return;
- let response = await fetch(`${URL}/api/enroll`, {
+ else { 
+  const item = localStorage.getItem("Liked");
+  if (!item) {
+   setIsLiked(false);
+ } 
+  else {
+  const likedCourses = JSON.parse(item);
+  const idx = likedCourses.findIndex((item:string) => {
+  if (item == course) return true;
+  });
+  if (idx != -1) {
+   likedCourses.splice(idx,1);
+   const value = JSON.stringify(likedCourses);
+   likedCourses.setItem("Liked",value);
+ }
+ }
+  setIsLiked(false)
+ } 
+ return;
+ /*let response = await fetch(`${URL}/api/enroll`, {
     method: "POST",
     headers: {
      "Content-Type": "application/json",
@@ -83,7 +134,7 @@ const removeFromLiked = async () => {
  const json = await response.json();
  if (json.success) {
   setIsLiked(false);
- } 
+ } */
 };
 
 
