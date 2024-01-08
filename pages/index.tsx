@@ -123,8 +123,20 @@ export default function Home ({
  </div>
 </div>
 <div className="py-5 p-1.5 text-center rounded-lg my-4 mx-5  text-lg ">
-   <span className="text-3xl mx-1 text-pink-600">{"<"}</span>
- Skill up
+   <span className="text-3xl mx-1 text-pink-600">{"<"}</span><TypeAnimation
+      sequence={[
+        'Skill up',
+        700,
+        'Be The Very Best',
+        1000,
+        'Version Of Yourself',
+        1000
+      ]}
+      wrapper="span"
+      speed={50}
+      style={{ fontSize: '1.5em', display: 'inline-block', }}
+      repeat={100}
+    />
  <span className="text-pink-600 text-3xl mx-1">{"/>"}</span>
       <button className="rounded-full w-28 font-lato bg-pink-500 block mt-4 py-2 font-lato text-md text-white mx-auto lg:hidden">
         Explore
@@ -194,7 +206,12 @@ export default function Home ({
  <ShowByCategory Data={Data} android={android} web={web} dataScience={dataScience} devops={devops} machineLearning={machineLearning}  /> 
 
 
-
+<div className="flex flex-wrap  gap-2 mx-auto md:gap-3 md:w-[96%] w-full mt-20 md:px-3 my-16 px-2">
+    <h1 className="text-3xl md:text-5xl  font-medium px-3 title-font text-gray-900 w-full mb-6 md:text-center myColor ">Popular Courses</h1>
+   {Data.map((item:Course, idx:number)=>{
+      return <CourseItem key={idx} CourseDetails={item} />
+     })}
+    </div>
 
  
 
@@ -352,27 +369,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 
 /*
-<TypeAnimation
-      sequence={[
-        'Skill up',
-        700,
-        'Be The Very Best',
-        1000,
-        'Version Of Yourself',
-        1000
-      ]}
-      wrapper="span"
-      speed={50}
-      style={{ fontSize: '1.5em', display: 'inline-block', }}
-      repeat={100}
-    />
 
-<div className="flex flex-wrap  gap-2 mx-auto md:gap-3 md:w-[96%] w-full mt-20 md:px-3 my-16 px-2">
-    <h1 className="text-3xl md:text-5xl  font-medium px-3 title-font text-gray-900 w-full mb-6 md:text-center myColor ">Popular Courses</h1>
-   {Data.map((item:Course, idx:number)=>{
-      return <CourseItem key={idx} CourseDetails={item} />
-     })}
-    </div>
+
+
 
 
 */

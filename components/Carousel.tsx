@@ -3,9 +3,23 @@ import React from "react";
 import Cards from  "./Card";
 
 type Prop =  {
-  Data: [],
+  Data: Course[],
 }
 
+type Course = {
+ name : string,
+ courseId : string,
+ price:  number,
+ description: string,
+ mentors: [],
+ playlistId:string,
+ img: string,
+ rating: number,
+ comments: [],
+ enrolledCount: number,
+ isVideo: boolean,
+ likes: number,
+}
 
 
 export default function Caro(Props:Prop) {

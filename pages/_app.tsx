@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
 <SessionProvider session={pageProps.session}>
  <ThemeProvider>
- <Nav/>
+ 
   <LoadingBar
    color='#f11946'
    waitingTime={400}
