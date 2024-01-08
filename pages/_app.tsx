@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
 <SessionProvider session={pageProps.session}>
  <ThemeProvider>
- 
+  <Nav/>
   <LoadingBar
    color='#f11946'
    waitingTime={400}
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   /> 
   <PageSpinner Loading={progress==0?false:true}/>
     <Component {...pageProps} />
-   <BottomNavbar setTab={setTab} tab={tab} />
+   
     <Footer />
  </ThemeProvider>
 </SessionProvider>
