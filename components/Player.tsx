@@ -1,15 +1,22 @@
-import React from 'react';
+import React from "react";
 
 type playerProps = {
-  id:string
-}
+  id: string;
+};
 
-
-export default function Player (Data:playerProps) {
-  
+export default function Player(Data: playerProps) {
+  React.useEffect(() => {
+    console.log(Data.id);
+  }, []);
   return (
-   <div className="w-full lg:w-3/4 mx-auto flex justify-center pt-8 px-5 box-border">
-  <iframe className="w-full aspect-[16/10] rounded-lg" src={`https://www.youtube.com/embed/${Data.id}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen ></iframe>
-  </div>
+    <div className="w-full lg:w-3/4 mx-auto flex justify-center pt-8 px-5 box-border">
+      <iframe
+        className="w-full aspect-[16/10] rounded-lg"
+        src={`https://www.youtube.com/embed/${Data.id}`}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
   );
 }

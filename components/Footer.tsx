@@ -61,7 +61,7 @@ React.useEffect(()=>{
       <div className="mx-auto w-full  px-8 bg-black">
         <div className="mx-auto grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 ">
           {SITEMAP.map(({ title, links }, key) => (
-            <Accordion open={open === key || !vpSize}  key={key} icon={<Icon id={key} open={open} />} className="w-full ">
+            <Accordion open={(open === key) || !vpSize}  key={key} icon={<Icon id={key} open={open} />} className="w-full ">
               <AccordionHeader className="border-0 text-lg p-0 w-full" onClick={() => handleOpen(key)}>
               <Typography
                 variant="small"
